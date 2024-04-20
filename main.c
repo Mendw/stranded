@@ -69,12 +69,18 @@ bool _find_words_for(TreeNode* dictionary, char letters[INPUT_H][INPUT_W], WordL
     return true;
 }
 
-void print_doneness(int x, int y) {
+void repeat_character(const char character, const int ammount) {
+    for(int i = 0; i < ammount; i++) putchar(character);
+}
+
+void print_doneness(const int x, const int y) {
     int ammount_done = y * INPUT_W + x + 1;
     int total = INPUT_W * INPUT_H;
     float percentage = ((float)ammount_done/(float)total) * 100.0f;
 
-    printf("%3.3f%%\r", percentage);
+    printf("\r%5.2f%%", percentage);
+    int n_bars = (ammount_done * 100) / (total * 2);
+    repeat_character('.', n_bars);
 }
 
 void find_words_for(TreeNode* dictionary, char letters[INPUT_H][INPUT_W], WordLLNode** word_list, int x, int y, int max_length) {
